@@ -15,5 +15,23 @@ document.getElementById('previewbutton').addEventListener('click', function() {
     document.querySelector('.subtitle-text').textContent = subtitle;
     document.querySelector('.message-text').textContent = message;
 
-
 });
+
+const cardform = document.querySelector('.card-form');
+const saveButton = document.getElementById('savebutton');
+saveButton.addEventListener('click', saveCard);
+function saveCard(event) {
+  event.preventDefault(); 
+  let cardsArray = JSON.parse(localStorage.getItem('cards')) || [];
+  const newCard = {
+    to: cardform.elements['to'].value,
+    from: cardform.elements['from'].value,
+    title: cardform.elements['title'].value,
+    subtitle: cardform.elements['subtitle'].value,
+    message: cardform.elements['message'].value
+  };
+
+  cardsArray.push(newCard);
+  localStorage.setItem('cards', JSON.stringify(cardsArray));
+  form.reset();
+}
